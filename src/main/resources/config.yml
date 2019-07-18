@@ -2,7 +2,7 @@
 
 forceLocation: true # Force the user to remain in a certain location.
 
-forcedWorldName: "the_end" # the name of the world to force the user to remain in
+forcedWorldName: "world_the_end" # the name of the world to force the user to remain in
 forcedX: 0 # the coordinates that the user must remain at.
 forcedY: 200
 forcedZ: 0
