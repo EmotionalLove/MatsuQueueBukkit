@@ -1,3 +1,17 @@
+/*
+ *  This program is free software. It comes without any warranty, to
+ *  * the extent permitted by applicable law. You can redistribute it
+ *  * and/or modify it under the terms of the Do What The Fuck You Want
+ *  * To Public License, Version 2, as published by Sam Hocevar. See
+ *  * http://www.wtfpl.net/ for more details.
+ */
+
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ for more details. */
+
 package me.someonelove.matsuqueue.bukkit;
 
 import org.bukkit.GameMode;
@@ -10,7 +24,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-//
+
 import java.util.logging.Level;
 
 public final class MatsuQueue extends JavaPlugin implements Listener {
