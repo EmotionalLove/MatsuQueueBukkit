@@ -1,5 +1,5 @@
 # MatsuQueueBukkit
-The bukkit plugin for MatsuQueue queue servers. See (MatsuQueueBungee)[https://github.com/EmotionalLove/MatsuQueueBungee] for the Bungeecord companion plugin.
+The bukkit plugin for MatsuQueue queue servers. See [MatsuQueueBungee](https://github.com/EmotionalLove/MatsuQueueBungee) for the Bungeecord companion plugin.
 
 ## About
 This is an *optional* plugin for Bukkit/Spigot servers designated to be MatsuQueue queue servers. Depending on your needs and desires, you may desire this plugin. This plugin can help reduce load on your queue servers, and help keep a clean queue experience for your players.
