@@ -1,0 +1,108 @@
+package me.someonelove.matsuqueue.bukkit;
+
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Level;
+
+public final class MatsuQueue extends JavaPlugin implements Listener {
+
+    public boolean forceLocation = true;
+
+    public String forcedWorldName = "the_end";
+    public int forcedX = 0;
+    public int forcedY = 200;
+    public int forcedZ = 0;
+
+    public boolean hidePlayers = true;
+    public boolean restrictMovement = true;
+    public boolean forceGamemode = true;
+    public String forcedGamemode = "spectator"; // spectator
+
+    @Override
+    public void onEnable() {
+        this.saveDefaultConfig();
+        this.forceLocation = this.getConfig().getBoolean("forceLocation");
+        this.forcedWorldName = this.getConfig().getString("forcedWorldName");
+        this.forcedX = this.getConfig().getInt("forcedX");
+        this.forcedY = this.getConfig().getInt("forcedY");
+        this.forcedZ = this.getConfig().getInt("forcedZ");
+        this.hidePlayers = this.getConfig().getBoolean("hidePlayers");
+        this.restrictMovement = this.getConfig().getBoolean("restrictMovement");
+        this.forceGamemode = this.getConfig().getBoolean("forceGamemode");
+        this.forcedGamemode = this.getConfig().getString("forcedGamemode");
+        this.getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        if (isExcluded(e.getPlayer())) {
+            e.getPlayer().sendMessage("\2476Due to your permissions, you've been excluded from the MatsuQueue movement and gamemode restrictions.");
+            return;
+        }
+        if (!forceLocation) return;
+        e.getPlayer().teleport(generateForcedLocation());
+    }
+
+    @EventHandler
+    public void onPlayerJoin$0(PlayerJoinEvent e) {
+        if (!hidePlayers) return;
+        for (Player onlinePlayer : getServer().getOnlinePlayers()) {
+            e.getPlayer().hidePlayer(this, onlinePlayer);
+            onlinePlayer.hidePlayer(this, e.getPlayer());
+            e.setJoinMessage("");
+        }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        if (!hidePlayers) return;
+        e.setQuitMessage("");
+    }
+
+    @EventHandler
+    public void onPlayerJoin$1(PlayerJoinEvent e) {
+        if (!forceGamemode) return;
+        if (isExcluded(e.getPlayer())) return;
+        e.getPlayer().setGameMode(GameMode.valueOf(forcedGamemode.toUpperCase()));
+    }
+
+    @EventHandler
+    public void onPlayerSpawn(PlayerRespawnEvent e) {
+        if (!forceLocation) return;
+        if (isExcluded(e.getPlayer())) return;
+        e.setRespawnLocation(generateForcedLocation());
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent e) {
+        if (!restrictMovement) return;
+        if (isExcluded(e.getPlayer())) return;
+        e.setCancelled(true);
+    }
+
+    private boolean isExcluded(Player player) {
+        return (player.isOp() || player.hasPermission("matsuqueue.admin"));
+    }
+
+    private Location generateForcedLocation() {
+        if (getServer().getWorld(forcedWorldName) == null) {
+            this.getLogger().log(Level.SEVERE, "Invalid forcedWorldName!! Check the configuration.");
+            return null;
+        }
+        return new Location(getServer().getWorld(forcedWorldName), forcedX, forcedY, forcedZ);
+    }
+}
