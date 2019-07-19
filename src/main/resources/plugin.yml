@@ -1,5 +1,5 @@
 name: MatsuQueue
-version: 1.0.0
+version: 1.0.1
 main: me.someonelove.matsuqueue.bukkit.MatsuQueue
 authors: [Sasha]
 description: The bukkit companion plugin that should be installed on any designated queue servers
