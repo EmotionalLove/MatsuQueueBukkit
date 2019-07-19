@@ -16,6 +16,7 @@ package me.someonelove.matsuqueue.bukkit;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -53,6 +54,7 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
         this.restrictMovement = this.getConfig().getBoolean("restrictMovement");
         this.forceGamemode = this.getConfig().getBoolean("forceGamemode");
         this.forcedGamemode = this.getConfig().getString("forcedGamemode");
+        setGameRule();
         this.getServer().getPluginManager().registerEvents(this, this);
     }
 
@@ -85,6 +87,14 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
     public void onPlayerQuit(PlayerQuitEvent e) {
         if (!hidePlayers) return;
         e.setQuitMessage("");
+    }
+
+    public void setGameRule() {
+        if (!hidePlayers) return;
+        for (World world : this.getServer().getWorlds()) {
+            world.setGameRuleValue("announceAdvancements", "false");
+        }
+        this.getLogger().log(Level.INFO, "Gamerule announceAdvancements was set to false because hidePlayers was true.");
     }
 
     @EventHandler
