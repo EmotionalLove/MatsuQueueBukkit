@@ -14,6 +14,14 @@
  *  * http://www.wtfpl.net/ for more details.
  */
 
+/*
+ *  This program is free software. It comes without any warranty, to
+ *  * the extent permitted by applicable law. You can redistribute it
+ *  * and/or modify it under the terms of the Do What The Fuck You Want
+ *  * To Public License, Version 2, as published by Sam Hocevar. See
+ *  * http://www.wtfpl.net/ for more details.
+ */
+
 /* This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it
  * and/or modify it under the terms of the Do What The Fuck You Want
@@ -37,7 +45,7 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
 
     public boolean forceLocation = true;
 
-    public String forcedWorldName = "the_end";
+    public String forcedWorldName = "world_the_end";
     public int forcedX = 0;
     public int forcedY = 200;
     public int forcedZ = 0;
