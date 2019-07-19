@@ -23,4 +23,15 @@ disableChat: true # Restrict players from chatting.
 ```
 
 # Pre-made Queue World
-If you want a simple pre-made queue world that features a "screensaver", check out the world in this github repo [here]()
+If you want a simple pre-made queue world that features a "screensaver", check out the world in this github repo [here](https://github.com/EmotionalLove/MatsuQueueBukkit/raw/master/queue_world.zip)
+
+The default forced location values are required for this world as-is:
+
+```yml
+forcedWorldName: "world_the_end"
+forcedX: 0
+forcedY: 200
+forcedZ: 0
+```
+
+When your users log into the world, their screen will look like [this](https://i.imgur.com/i8GJXzw.jpg) until they finish queuing :3
