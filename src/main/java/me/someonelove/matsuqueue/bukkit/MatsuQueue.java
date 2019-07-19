@@ -6,6 +6,14 @@
  *  * http://www.wtfpl.net/ for more details.
  */
 
+/*
+ *  This program is free software. It comes without any warranty, to
+ *  * the extent permitted by applicable law. You can redistribute it
+ *  * and/or modify it under the terms of the Do What The Fuck You Want
+ *  * To Public License, Version 2, as published by Sam Hocevar. See
+ *  * http://www.wtfpl.net/ for more details.
+ */
+
 /* This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it
  * and/or modify it under the terms of the Do What The Fuck You Want
@@ -20,10 +28,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -38,6 +43,7 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
     public int forcedZ = 0;
 
     public boolean hidePlayers = true;
+    public boolean disableChat = true;
     public boolean restrictMovement = true;
     public boolean forceGamemode = true;
     public String forcedGamemode = "spectator"; // spectator
@@ -53,10 +59,13 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
         this.hidePlayers = this.getConfig().getBoolean("hidePlayers");
         this.restrictMovement = this.getConfig().getBoolean("restrictMovement");
         this.forceGamemode = this.getConfig().getBoolean("forceGamemode");
+        this.disableChat = this.getConfig().getBoolean("disableChat");
         this.forcedGamemode = this.getConfig().getString("forcedGamemode");
         setGameRule();
         this.getServer().getPluginManager().registerEvents(this, this);
     }
+
+
 
     @Override
     public void onDisable() {
@@ -109,6 +118,11 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
         if (!forceLocation) return;
         if (isExcluded(e.getPlayer())) return;
         e.setRespawnLocation(generateForcedLocation());
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e) {
+        if (disableChat) e.setCancelled(true);
     }
 
     @EventHandler
