@@ -85,7 +85,7 @@ public final class MatsuQueue extends JavaPlugin implements Listener {
     public void setGameRule() {
         if (!hidePlayers) return;
         for (World world : this.getServer().getWorlds()) {
-            world.setGameRuleValue("announceAdvancements", "false");
+            world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         }
         this.getLogger().log(Level.INFO, "Gamerule announceAdvancements was set to false because hidePlayers was true.");
     }
